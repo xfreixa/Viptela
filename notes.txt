@@ -1,0 +1,1 @@
+curl -v -X POST -d '{"j_username": "admin", "j_password": "admin"}' https://18.194.16.179/j_security_check
