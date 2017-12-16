@@ -49,8 +49,7 @@ print('\nList of Feature Templates: ')
 print('%-60s%-60s' %('Template Name' , 'Template ID'))
 for i in range (0,len(featureTemplates["data"])-1):
 	print('%-60s%-60s'%(featureTemplates["data"][i]["templateName"] ,featureTemplates["data"][i]["templateId"]))
-print()
-print('Total number of Templates: ' , len(featureTemplates["data"])-1)
+print('\nTotal number of Templates: ' , len(featureTemplates["data"])-1)
 
     # Make an API GET request for device list
 devices = json.loads(get(VMANAGEIP, '/device'))
