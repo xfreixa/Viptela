@@ -24,7 +24,7 @@ if response.status_code !=  200:
 featureTemplates = json.loads(response.content)
 print('List of Feature Templates: ')
 print('%-60s%-60s' %('Template Name' , 'Template ID'))
-for i in range (0,len(featureTemplates["data"])-1):
+for i in range (0,len(featureTemplates["data"])):
 	print('%-60s%-60s'%(featureTemplates["data"][i]["templateName"] ,featureTemplates["data"][i]["templateId"]))
 print()
 print('Total number of Templates: ' , len(featureTemplates["data"])-1)

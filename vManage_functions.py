@@ -47,7 +47,7 @@ sess = login(VMANAGEIP, USERNAME, PASSWORD)
 featureTemplates = json.loads(get(VMANAGEIP, '/template/feature'))
 print('\nList of Feature Templates: ')
 print('%-60s%-60s' %('Template Name' , 'Template ID'))
-for i in range (0,len(featureTemplates["data"])-1):
+for i in range (0,len(featureTemplates["data"])):
 	print('%-60s%-60s'%(featureTemplates["data"][i]["templateName"] ,featureTemplates["data"][i]["templateId"]))
 print('\nTotal number of Templates: ' , len(featureTemplates["data"])-1)
 
@@ -55,6 +55,6 @@ print('\nTotal number of Templates: ' , len(featureTemplates["data"])-1)
 devices = json.loads(get(VMANAGEIP, '/device'))
 print('\nList of devices:')
 print('%-18s%-12s%-40s' % ('System IP', 'Site-ID', 'UUID'))
-for i in range (0,len(devices["data"])-1):
+for i in range (0,len(devices["data"])):
 	if "vedge" in devices["data"][i]["device-type"]:
 		print('%-18s%-12s%-40s' % (devices["data"][i]["system-ip"], devices["data"][i]["site-id"], devices["data"][i]["uuid"]))

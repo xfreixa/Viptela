@@ -24,6 +24,6 @@ if response.status_code !=  200:
 devices = json.loads(response.content)
 print('List of devices:')
 print('%-18s%-12s%-40s' % ('System IP', 'Site-ID', 'UUID'))
-for i in range (0,len(devices["data"])-1):
+for i in range (0,len(devices["data"])):
 	if "vedge" in devices["data"][i]["device-type"]:
 		print('%-18s%-12s%-40s' % (devices["data"][i]["system-ip"], devices["data"][i]["site-id"], devices["data"][i]["uuid"]))
