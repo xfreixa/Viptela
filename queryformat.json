@@ -1,0 +1,30 @@
+{
+    "size": integer,
+    "query":
+    {
+      "condition": "AND | OR",
+      "rules":
+      [
+        {
+          "field": "field-name",
+          "type": "data-type",
+          "value":
+          [
+            "value"
+          ],
+          "operator": "operator"
+        }
+      ]
+    },
+    "sort":
+    [
+      {
+        "field": "field-name",
+        "order": "(asc | desc)"
+      }
+    ],
+    "fields":
+    [
+      "",
+    ],
+  }

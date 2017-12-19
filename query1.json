@@ -1,0 +1,31 @@
+{
+    "size": 10000,
+    "query":
+    {
+      "condition": "AND",
+      "rules":
+      [
+        {
+          "field": "vdevice_name",
+          "type": "string",
+          "value":
+          [
+            "BR2-VEDGE1"
+          ],
+          "operator": "last_3_days"
+        }
+      ]
+    },
+    "sort":
+    [
+      {
+        "field": "vdevice_name",
+        "type": "string",
+        "order": "desc"
+      }
+    ],
+    "fields":
+    [
+      "interface", "rx_octets"
+    ]
+  }

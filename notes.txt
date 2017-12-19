@@ -1,1 +1,16 @@
 curl -v -X POST -d '{"j_username": "admin", "j_password": "admin"}' https://18.194.16.179/j_security_check
+
+
+To Do List:
+
+1.- Make a call with a query, for interface statistics, for instance. First make it through the apidocs, and then add it to a script.
+
+2.- Make viptela2.py and calls2.py with all the formatting in viptela2.py
+
+3.- Make the calls to vManage from an html page through JavaScript calls
+
+4.- Make the calls to vManage through a script and publish the output in a spark room
+
+5.- Make a bot in spark to receive the get requests output in spark
+
+

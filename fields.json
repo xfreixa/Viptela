@@ -1,0 +1,110 @@
+[
+    {
+      "property": "entry_time",
+      "dataType": "date"
+    },
+    {
+      "property": "vip_idx",
+      "dataType": "number"
+    },
+    {
+      "property": "statcycletime",
+      "dataType": "date"
+    },
+    {
+      "property": "vdevice_name",
+      "dataType": "string"
+    },
+    {
+      "property": "device_model",
+      "dataType": "string"
+    },
+    {
+      "property": "host_name",
+      "dataType": "string"
+    },
+    {
+      "property": "vpn_id",
+      "dataType": "number"
+    },
+    {
+      "property": "interface",
+      "dataType": "string"
+    },
+    {
+      "property": "rx_pkts",
+      "dataType": "number"
+    },
+    {
+      "property": "rx_octets",
+      "dataType": "number"
+    },
+    {
+      "property": "rx_errors",
+      "dataType": "number"
+    },
+    {
+      "property": "rx_drops",
+      "dataType": "number"
+    },
+    {
+      "property": "rx_pps",
+      "dataType": "number"
+    },
+    {
+      "property": "rx_kbps",
+      "dataType": "number"
+    },
+    {
+      "property": "tx_pkts",
+      "dataType": "number"
+    },
+    {
+      "property": "tx_octets",
+      "dataType": "number"
+    },
+    {
+      "property": "tx_errors",
+      "dataType": "number"
+    },
+    {
+      "property": "tx_drops",
+      "dataType": "number"
+    },
+    {
+      "property": "tx_pps",
+      "dataType": "number"
+    },
+    {
+      "property": "tx_kbps",
+      "dataType": "number"
+    },
+    {
+      "property": "total_mbps",
+      "dataType": "double"
+    },
+    {
+      "property": "oper_status",
+      "dataType": "string"
+    },
+    {
+      "property": "admin_status",
+      "dataType": "string"
+    },
+    {
+      "property": "bw_up",
+      "dataType": "number"
+    },
+    {
+      "property": "bw_down",
+      "dataType": "number"
+    },
+    {
+      "property": "up_capacity_percentage",
+      "dataType": "double"
+    },
+    {
+      "property": "down_capacity_percentage",
+      "dataType": "double"
+    }
+  ]
