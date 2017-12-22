@@ -1,4 +1,4 @@
-curl -v -X POST -d '{"j_username": "admin", "j_password": "admin"}' https://18.194.16.179/j_security_check
+curl -v -X POST -d '{"j_username": "admin", "j_password": "admin"}' https://198.18.1.10/j_security_check
 
 
 To Do List:
@@ -14,3 +14,8 @@ To Do List:
 5.- Make a bot in spark to receive the get requests output in spark
 
 
+
+
+curl -k -c cookies.txt -v -H "Content-Type: application/x-www-form-urlencoded" -d '{"j_username": "admin", "j_password": "admin"}' -X POST "https://198.18.1.10/j_security_check/"
+
+curl -k -b cookies.txt -v -X GET "https://198.18.1.10/dataservice/device"

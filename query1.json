@@ -6,7 +6,7 @@
       "rules":
       [
         {
-          "field": "vdevice_name",
+          "field": "host_name",
           "type": "string",
           "value":
           [
@@ -19,7 +19,7 @@
     "sort":
     [
       {
-        "field": "vdevice_name",
+        "field": "host_name",
         "type": "string",
         "order": "desc"
       }
@@ -28,4 +28,75 @@
     [
       "interface", "rx_octets"
     ]
+  }
+
+
+  {
+    "query":
+    {
+      "condition":"AND",
+      "rules":
+      [
+        {
+          "value":["3"],
+          "field":"entry_time",
+          "type":"date",
+          "operator":"last_n_hours"
+        },
+        {
+          "value":["10.4.0.1"],
+          "field":"vdevice_name",
+          "type":"string",
+          "operator":"in"
+        },
+        {
+          "value":
+            [
+              "ge0/0",
+              "ge0/1",
+              "system",
+              "eth0",
+              "ge0/2"
+            ],
+          "field":"interface",
+          "type":"string",
+          "operator":"in"
+        }
+      ]
+    },
+    "sort":
+    [
+      {
+        "field":"entry_time",
+        "type":"date","order":"asc"
+      }
+    ],
+    "aggregation":
+    {
+      "field":
+      [
+        {
+          "property":"interface",
+          "sequence":1
+        }
+      ],
+    "histogram":
+    {
+      "property":"entry_time",
+      "type":"minute",
+      "interval":5,
+      "order":"asc"
+    },
+    "metrics":
+    [
+      {
+        "property":"rx_kbps",
+        "type":"avg"
+      },
+      {
+        "property":"tx_kbps",
+        "type":"avg"
+      }
+    ]
+    }
   }
