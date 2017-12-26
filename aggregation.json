@@ -1,1 +1,105 @@
-{"header":{"generatedOn":1513955466654,"viewKeys":{"uniqueKey":[],"preferenceKey":"grid-approute_histogram"},"columns":[{"title":"Event time","property":"entry_time","displayFormat":"DD MMM YYYY h:mm:ss A z","inputFormat":"unix-time","dataType":"date"},{"title":"Tunnel Color","property":"color","dataType":"string"},{"title":"Avg. Loss (%)","property":"loss_percentage","dataType":"number"},{"title":"Avg. Latency (ms)","property":"latency","dataType":"number"},{"title":"Avg. Jitter (ms)","property":"jitter","dataType":"number"}],"fields":[{"property":"entry_time","dataType":"date"},{"property":"color","dataType":"string"},{"property":"loss_percentage","dataType":"number"},{"property":"latency","dataType":"number"},{"property":"jitter","dataType":"number"}],"chart":{"xAxis":["entry_time"],"yAxis":["loss_percentage","latency","jitter"],"series":["color"],"title":"Transport health","xAxisLabel":"Time","yAxisLabel":""}},"data":[{"entry_time":1513951200000,"jitter":0.14,"color":"biz-internet:biz-internet","loss_percentage":0,"latency":1.063},{"entry_time":1513951200000,"jitter":0.097,"color":"mpls:mpls","loss_percentage":0.035,"latency":1.032},{"entry_time":1513947600000,"jitter":0.12,"color":"biz-internet:biz-internet","loss_percentage":0,"latency":1.073},{"entry_time":1513947600000,"jitter":0.095,"color":"mpls:mpls","loss_percentage":0.055,"latency":1.041},{"entry_time":1513944000000,"jitter":0.121,"color":"biz-internet:biz-internet","loss_percentage":0,"latency":1.079},{"entry_time":1513944000000,"jitter":0.085,"color":"mpls:mpls","loss_percentage":0.038,"latency":1.032},{"entry_time":1513940400000,"jitter":0.095,"color":"biz-internet:biz-internet","loss_percentage":0,"latency":1.054},{"entry_time":1513940400000,"jitter":0.081,"color":"mpls:mpls","loss_percentage":0.011,"latency":0.995}]}
+{
+    "header": {
+        "generatedOn": 1513955466654,
+        "viewKeys": {
+            "uniqueKey": [],
+            "preferenceKey": "grid-approute_histogram"
+        },
+        "columns": [{
+            "title": "Event time",
+            "property": "entry_time",
+            "displayFormat": "DD MMM YYYY h:mm:ss A z",
+            "inputFormat": "unix-time",
+            "dataType": "date"
+        }, {
+            "title": "Tunnel Color",
+            "property": "color",
+            "dataType": "string"
+        }, {
+            "title": "Avg. Loss (%)",
+            "property": "loss_percentage",
+            "dataType": "number"
+        }, {
+            "title": "Avg. Latency (ms)",
+            "property": "latency",
+            "dataType": "number"
+        }, {
+            "title": "Avg. Jitter (ms)",
+            "property": "jitter",
+            "dataType": "number"
+        }],
+        "fields": [{
+            "property": "entry_time",
+            "dataType": "date"
+        }, {
+            "property": "color",
+            "dataType": "string"
+        }, {
+            "property": "loss_percentage",
+            "dataType": "number"
+        }, {
+            "property": "latency",
+            "dataType": "number"
+        }, {
+            "property": "jitter",
+            "dataType": "number"
+        }],
+        "chart": {
+            "xAxis": ["entry_time"],
+            "yAxis": ["loss_percentage", "latency", "jitter"],
+            "series": ["color"],
+            "title": "Transport health",
+            "xAxisLabel": "Time",
+            "yAxisLabel": ""
+        }
+    },
+    "data": [{
+        "entry_time": 1513951200000,
+        "jitter": 0.14,
+        "color": "biz-internet:biz-internet",
+        "loss_percentage": 0,
+        "latency": 1.063
+    }, {
+        "entry_time": 1513951200000,
+        "jitter": 0.097,
+        "color": "mpls:mpls",
+        "loss_percentage": 0.035,
+        "latency": 1.032
+    }, {
+        "entry_time": 1513947600000,
+        "jitter": 0.12,
+        "color": "biz-internet:biz-internet",
+        "loss_percentage": 0,
+        "latency": 1.073
+    }, {
+        "entry_time": 1513947600000,
+        "jitter": 0.095,
+        "color": "mpls:mpls",
+        "loss_percentage": 0.055,
+        "latency": 1.041
+    }, {
+        "entry_time": 1513944000000,
+        "jitter": 0.121,
+        "color": "biz-internet:biz-internet",
+        "loss_percentage": 0,
+        "latency": 1.079
+    }, {
+        "entry_time": 1513944000000,
+        "jitter": 0.085,
+        "color": "mpls:mpls",
+        "loss_percentage": 0.038,
+        "latency": 1.032
+    }, {
+        "entry_time": 1513940400000,
+        "jitter": 0.095,
+        "color": "biz-internet:biz-internet",
+        "loss_percentage": 0,
+        "latency": 1.054
+    }, {
+        "entry_time": 1513940400000,
+        "jitter": 0.081,
+        "color": "mpls:mpls",
+        "loss_percentage": 0.011,
+        "latency": 0.995
+    }]
+}

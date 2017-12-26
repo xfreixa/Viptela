@@ -1,0 +1,132 @@
+ system
+ host-name               DC2-VEDGE2
+ gps-location latitude 37.0
+ gps-location longitude -122.0
+ system-ip               10.2.0.2
+ site-id                 200
+ max-controllers         1
+ max-omp-sessions        1
+ no route-consistency-check
+ organization-name       "Cisco Sy1 - 19968"
+ vbond 198.18.1.11
+ aaa
+  auth-order local radius tacacs
+  usergroup basic
+   task system read write
+   task interface read write
+  !
+  usergroup netadmin
+  !
+  usergroup operator
+   task system read
+   task interface read
+   task policy read
+   task routing read
+   task security read
+  !
+  user admin
+   password $6$siwKBQ==$wT2lUa9BSreDPI6gB8sl4E6PAJoVXgMbgv/whJ8F1C6sWdRazdxorYYTLrL6syiG6qnLABTnrE96HJiKF6QRq1
+  !
+ !
+ logging
+  disk
+   enable
+  !
+ !
+!
+bfd app-route multiplier 2
+bfd app-route poll-interval 10000
+omp
+ no shutdown
+ ecmp-limit       8
+ graceful-restart
+ advertise ospf external
+ advertise connected
+ advertise static
+!
+security
+ ipsec
+  authentication-type sha1-hmac ah-sha1-hmac
+ !
+!
+vpn 0
+ dns 8.8.4.4 secondary
+ dns 8.8.8.8 primary
+ interface ge0/1
+  ip address 172.16.22.2/30
+  tunnel-interface
+   encapsulation ipsec
+   color mpls restrict
+   max-control-connections 1
+   no allow-service bgp
+   allow-service dhcp
+   allow-service dns
+   allow-service icmp
+   no allow-service sshd
+   no allow-service netconf
+   allow-service ntp
+   no allow-service ospf
+   no allow-service stun
+  !
+  no shutdown
+ !
+ interface ge0/2
+  ip address 172.16.23.2/30
+  nat
+  !
+  tunnel-interface
+   encapsulation ipsec
+   color biz-internet restrict
+   max-control-connections 1
+   no allow-service bgp
+   allow-service dhcp
+   allow-service dns
+   allow-service icmp
+   no allow-service sshd
+   no allow-service netconf
+   allow-service ntp
+   no allow-service ospf
+   no allow-service stun
+  !
+  no shutdown
+ !
+ ip route 0.0.0.0/0 172.16.22.1
+ ip route 0.0.0.0/0 172.16.23.1
+!
+vpn 10
+ ecmp-hash-key layer4
+ service FW address 10.2.0.1
+ router
+  ospf
+   router-id 10.2.0.2
+   timers spf 200 1000 10000
+   redistribute omp
+   area 0
+    interface ge0/0
+    exit
+   exit
+  !
+ !
+ cloudexpress
+  node-type    gateway
+  applications salesforce amazon_aws dropbox concur
+ !
+ interface ge0/0
+  ip address 10.2.0.212/24
+  no shutdown
+ !
+ omp
+  advertise ospf external
+ !
+!
+vpn 512
+ interface eth0
+  ip address 198.18.134.103/18
+  no shutdown
+ !
+ ip route 0.0.0.0/0 198.18.128.1
+!
+policy
+ app-visibility
+ flow-visibility
+!

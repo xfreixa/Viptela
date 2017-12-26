@@ -1,0 +1,116 @@
+ system
+ host-name               BR1-VEDGE2
+ gps-location latitude 34.0
+ gps-location longitude -118.0
+ system-ip               10.3.0.2
+ site-id                 300
+ no route-consistency-check
+ organization-name       "Cisco Sy1 - 19968"
+ vbond 198.18.1.11
+ aaa
+  auth-order local radius tacacs
+  usergroup basic
+   task system read write
+   task interface read write
+  !
+  usergroup netadmin
+  !
+  usergroup operator
+   task system read
+   task interface read
+   task policy read
+   task routing read
+   task security read
+  !
+  user admin
+   password $6$A8hGZWuwJgoL4Ftc$PJr5lvslBrRYfPh/DuE4WJ1m.VdRGsjQiESUJYzsA89R2.4Lwj77AwLmoVHe/SE/6ZSRjmXdUsbQ4tUsxX.rr1
+  !
+ !
+ logging
+  disk
+   enable
+  !
+ !
+!
+bfd app-route multiplier 2
+bfd app-route poll-interval 5000
+omp
+ no shutdown
+ ecmp-limit       8
+ graceful-restart
+ advertise connected
+ advertise static
+!
+security
+ ipsec
+  authentication-type ah-sha1-hmac sha1-hmac
+ !
+!
+vpn 0
+ interface ge0/1
+  ip dhcp-client
+  nat
+  !
+  tunnel-interface
+   encapsulation ipsec
+   color biz-internet restrict
+   max-control-connections 1
+   no allow-service bgp
+   allow-service dhcp
+   allow-service dns
+   allow-service icmp
+   no allow-service sshd
+   no allow-service netconf
+   no allow-service ntp
+   no allow-service ospf
+   no allow-service stun
+  !
+  no shutdown
+ !
+ interface ge0/2
+  ip address 10.20.20.1/24
+  tloc-extension ge0/1
+  no shutdown
+ !
+ interface ge0/3
+  ip address 10.10.10.2/24
+  tunnel-interface
+   encapsulation ipsec
+   color mpls restrict
+   max-control-connections 1
+   no allow-service bgp
+   allow-service dhcp
+   allow-service dns
+   allow-service icmp
+   no allow-service sshd
+   no allow-service netconf
+   no allow-service ntp
+   no allow-service ospf
+   no allow-service stun
+  !
+  no shutdown
+ !
+ ip route 0.0.0.0/0 10.10.10.1
+!
+vpn 10
+ interface ge0/0
+  ip address 10.3.0.3/24
+  no shutdown
+  vrrp 1
+   priority  10
+   track-omp
+   ipv4 10.3.0.1
+  !
+ !
+!
+vpn 512
+ interface eth0
+  ip address 198.18.134.105/18
+  no shutdown
+ !
+ ip route 0.0.0.0/0 198.18.128.1
+!
+policy
+ app-visibility
+ flow-visibility
+!

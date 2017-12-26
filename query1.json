@@ -100,3 +100,20 @@
     ]
     }
   }
+
+
+
+  {
+    "query":
+    {
+      "rules":
+      [
+        {
+          "value":["BR2-VEDGE1"],
+          "field":"host_name",
+          "type":"string",
+          "operator":"in"
+        }
+      ]
+    }
+  }
