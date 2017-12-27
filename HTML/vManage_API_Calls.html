@@ -1,0 +1,141 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>vManage API Calls</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      font-weight: 300;
+      font-size: 1em;
+    }
+
+    h3 {
+      font-weight: 300;
+    }
+
+    div {
+      margin-top: 1.5em;
+    }
+
+    input,
+    textarea {
+      /* To make sure that all text fields have the same font settings
+         By default, textareas have a monospace font */
+      font: 1em sans-serif;
+      font-weight: 300;
+      /* To give the same size to all text fields */
+      width: 100%;
+      border: 0px;
+      margin-top: 0.5em;
+    }
+
+    textarea {
+      vertical-align: top;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      border-radius: 20px;
+      background-color: limegreen;
+      font-size: 1em;
+    }
+
+    /* Class selectors */
+    .frame {
+      /* Just to center the form on the page */
+      margin: 0 auto;
+      width: 600px;
+      padding: 1em;
+      background-color: lightgray;
+    }
+
+    .resetButton {
+      padding-top: 1em;
+      display: none;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="frame">
+    <h3>vManage API Calls</h3>
+
+    <div>
+      <button id="login" onclick="login()">Login to vManage</button>
+      <textarea id="loginResult" rows="3" hidden readonly></textarea>
+    </div>
+
+    <div>
+      <button id="getDeviceList" onclick="getDeviceList()">Get Device List</button>
+      <textarea id="getDeviceListResult" rows="3" hidden readonly></textarea>
+    </div>
+
+    <div>
+      The device list will be shown below.
+      <textarea id="output" rows="3"></textarea>
+    </div>
+  </div>
+</body>
+
+<script>
+  document.getElementById("login").focus();
+
+  function login() {
+
+    const headers = new Headers();
+    headers.append("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+    //headers.append("Access-Control-Allow-Origin", "null");
+    //headers.append("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD");
+    //headers.append("Content-Type", "application/json; charset=utf-8");
+
+    const options = {
+      method: "POST",
+      headers: headers,
+      mode: "cors",
+      body: "j_username=admin&j_password=admin"
+    };
+
+    fetch("https://198.18.1.10/j_security_check", options)
+      .then(response =>  {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("network response was not ok: " + response.status);
+        }
+      })
+      .catch(error => {
+        alert("Something went wrong during login: " + error);
+      });
+  }
+
+  function getDeviceList() {
+
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json; charset=utf-8");
+
+    const options = {
+      method: "GET",
+      headers: headers,
+      mode: "cors",
+    };
+
+    fetch("https://198.18.1.10/dataservice/device", options)
+      .then(response =>  {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("network response was not ok: " + response.status);
+        }
+      })
+      .catch(error => {
+        alert("Something went wrong during login: " + error);
+      });
+  }
+
+
+</script>
+
+</html>

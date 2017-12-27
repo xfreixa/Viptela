@@ -95,3 +95,12 @@ query=%7B%22query%22%3A%7B%22condition%22%3A%22AND%22%2C%22rules%22%3A%5B%7B%22v
     "templateDescription": "Tenant1"
 }
 '''
+
+{"query":{"condition":"AND","rules":[{"value":["3"],"field":"entry_time","type":"date","operator":"last_n_hours"}]}}
+
+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(1347517370))
+
+spark token ZTc0NGIwZjMtNDdlNy00YmVjLWI5NjMtOGIxMTFjM2ZiZmMyZTMwNDk2N2YtZGQ4
+
+boot vManage Access Token MDhiNDI3MWEtNDVkOC00OTNhLWE3ZDEtMzM1ZDExNTUzZjhkMjhmNTFjYTEtYTMx
+

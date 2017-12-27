@@ -1,0 +1,216 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Server 1</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      font-weight: 300;
+      font-size: 1em;
+    }
+
+    h3 {
+      font-weight: 300;
+    }
+
+    div {
+      margin-top: 1.5em;
+    }
+
+    input,
+    textarea {
+      /* To make sure that all text fields have the same font settings
+         By default, textareas have a monospace font */
+      font: 1em sans-serif;
+      font-weight: 300;
+      /* To give the same size to all text fields */
+      width: 100%;
+      border: 0px;
+      margin-top: 0.5em;
+    }
+
+    textarea {
+      vertical-align: top;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      border-radius: 20px;
+      background-color: limegreen;
+      font-size: 1em;
+    }
+
+    /* Class selectors */
+    .frame {
+      /* Just to center the form on the page */
+      margin: 0 auto;
+      width: 600px;
+      padding: 1em;
+      background-color: lightgray;
+    }
+
+    .resetButton {
+      padding-top: 1em;
+      display: none;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="frame">
+    <h3>Add one or more persons to a room by email address</h3>
+
+    <div>
+      First we need a valid Cisco Spark API token. To get yours please go to <a target="_blank" href="https://developer.ciscospark.com">developer.ciscospark.com</a>, log in with your credentials and click on your avatar.
+      <input type="text" id="token" placeholder="Paste your API token here">
+    </div>
+
+    <div>
+      Then we will fetch the room ID for the room name you specify.
+      <input type="text" id="roomName" placeholder="Enter room name here" onfocus="clearRoomId()" onchange="getRoomId()">
+      <input type="text" id="roomId" placeholder="Room ID will be shown here" readonly>
+    </div>
+
+    <div>
+      Finally enter the list of members to add to the room.
+      <textarea id="members" rows="3" placeholder="Comma separated email list"></textarea>
+    </div>
+
+    <div>
+      <button id="buttonAddMembers" disabled onclick="addMembersToRoom()">Add members to the room</button>
+      <textarea id="log" rows="3" hidden readonly></textarea>
+    </div>
+
+    <div class="resetButton" id="buttonResetDiv">
+      <button id="buttonReset" onclick="clearAll()">Reset</button>
+    </div>
+  </div>
+</body>
+
+<script>
+  document.getElementById("token").focus();
+
+  function clearRoomId() {
+
+    document.getElementById("roomId").value = "";
+
+  }
+
+  function clearAll() {
+
+    document.getElementById("token").value = "";
+    document.getElementById("token").focus();
+    document.getElementById("roomName").value = "";
+    document.getElementById("roomId").value = "";
+    document.getElementById("members").value = "";
+    document.getElementById("buttonAddMembers").disabled = true;
+    document.getElementById("log").value = "";
+    document.getElementById("log").rows = "2";
+    document.getElementById("log").hidden = true;
+    document.getElementById("buttonResetDiv").style.display = "none";
+
+  }
+
+
+  function getRoomId() {
+
+    const apiToken = document.getElementById("token").value;
+    const roomName = document.getElementById("roomName").value;
+
+    if (apiToken !== "" && roomName !== "") {
+      const headers = new Headers();
+      headers.append("Content-Type", "application/json; charset=utf-8");
+      headers.append("Authorization", "Bearer " + apiToken);
+
+      const options = {
+        method: "GET",
+        headers: headers,
+        mode: "cors",
+        body: {
+          type: "group"
+        }
+      };
+
+      fetch("https://api.ciscospark.com/v1/rooms", options)
+        .then(response =>  {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error("network response was not ok: " + response.status);
+          }
+        })
+        .then(roomList => {
+          const rooms = roomList.items.filter(room => room.title === roomName);
+          if (rooms.length < 1) {
+            throw new Error("no room named '" + roomName + "' was found");
+          }
+          if (rooms.length > 1) {
+            throw new Error("more than one room named '" + roomName + "' were found");
+          }
+          document.getElementById("roomId").value = rooms[0].id;
+          document.getElementById("members").focus();
+          document.getElementById("buttonAddMembers").disabled = false;
+        })
+        .catch(error => {
+          alert("Something went wrong retrieving the room ID: " + error);
+        });
+    }
+
+  }
+
+
+  function addMembersToRoom() {
+
+    const apiToken = document.getElementById("token").value;
+    const roomName = document.getElementById("roomName").value;
+    const roomId = document.getElementById("roomId").value;
+    const members = document.getElementById("members").value;
+
+    if (roomId !== "" && members !== "") {
+      const headers = new Headers();
+      headers.append("Content-Type", "application/json; charset=utf-8");
+      headers.append("Authorization", "Bearer " + apiToken);
+
+      document.getElementById("log").rows = members.split(",").length + 1;
+      document.getElementById("log").hidden = false;
+
+      for (const member of members.split(",")) {
+        const options = {
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify({
+            roomId: roomId,
+            personEmail: member.trim()
+          })
+        };
+        fetch("https://api.ciscospark.com/v1/memberships", options)
+          .then(response =>  {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error("network response was not OK (" + response.status + ")");
+            }
+          })
+          .then(membership => {
+            let log = document.getElementById("log").value;
+            document.getElementById("log").value = log + "✅ " + membership.personDisplayName + "(" + membership.personEmail +
+              ")\n"
+          })
+          .catch(error => {
+            let log = document.getElementById("log").value;
+            document.getElementById("log").value = log + "🆘 " + "(" + member.trim() + ") " + error + "\n"
+          });
+      }
+      document.getElementById("buttonResetDiv").style.display = "block";
+      document.getElementById("buttonReset").focus();
+    } else {
+      document.getElementById("members").focus();
+    }
+
+  }
+</script>
+
+</html>
